@@ -6,7 +6,7 @@ use std::net::SocketAddr;
 fn load_token() -> String {
     let content = fs::read_to_string(".telegram.env").expect("Failed to read .telegram.env");
     for line in content.lines() {
-        if line.starts_with("TELEGRAM_BOT_TOKEN=") {
+        if line.starts_with("TELEGRAM_TOKEN=") {
             return line
                 .split('=')
                 .nth(1)
@@ -63,8 +63,8 @@ async fn telegram_webhook(Json(payload): Json<serde_json::Value>) -> &'static st
 async fn main() {
     let app = Router::new().route("/webhook", post(telegram_webhook));
 
-    // Bind locally to port 3000
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    // Bind locally to port 7890
+    let addr = SocketAddr::from(([127, 0, 0, 1], 7890));
     println!("Webhook server listening on {}", addr);
 
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
