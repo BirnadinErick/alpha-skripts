@@ -1,0 +1,14 @@
+[Unit]
+Description=Telegram Battery Status Bot
+After=network.target
+
+[Service]
+Type=simple
+User=be
+WorkingDirectory=/home/be/alpha_skripts/
+ExecStart=/usr/bin/python3 /home/be/alpha_skripts/battery-report.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
